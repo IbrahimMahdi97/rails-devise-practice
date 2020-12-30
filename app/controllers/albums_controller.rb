@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :edit, :update, :destroy]
-
+  # before_action :authenticate_user!, except: [:show, :index]
   # GET /albums
   # GET /albums.json
   def index
@@ -10,6 +10,7 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.json
   def show
+    @album = Albums.find(params[:id])
   end
 
   # GET /albums/new
@@ -25,7 +26,7 @@ class AlbumsController < ApplicationController
   # POST /albums.json
   def create
     @album = Albums.new(album_params)
-
+    @album.user = current_user
     respond_to do |format|
       if @album.save
         format.html { redirect_to @album, notice: 'Albums was successfully created.' }
@@ -64,11 +65,11 @@ class AlbumsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
-      @album = Albums.find(params[:id])
+      @album = Albums.where(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def album_params
-      params.require(:album).permit(:title, :image, :user_id)
+      params.require(:album).permit(:title, :image)
     end
 end

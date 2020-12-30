@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   get 'pages/home'
   root to: 'pages#home'
+
+  # get 'albums/show'
+  # root to: 'albums#show'
   
   # devise_for :models
   # devise_for :users
