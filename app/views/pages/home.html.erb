@@ -1,2 +1,4 @@
-<h1>Pages#home</h1>
+<h1> <%= @user.email.split('@')[0] %> Albums</h1>
+<%= image_tag("me.jpeg", :alt => "Ibrahim Picture")%>
+<%= @user.avatar %>
 <p>Find me in app/views/pages/home.html.erb</p>
