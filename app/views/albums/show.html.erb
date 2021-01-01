@@ -1,16 +1,17 @@
 <p>
   <strong>Title:</strong>
-  <%= @album.title %>
+  <%= @album.title %> Album
 </p>
 
 <p>
-  <strong>Image:</strong>
-  <%= @album.image %>
+  <div style='width: 500px; height:auto; margin:0 auto'>
+    <%= image_tag(@album.image, style:'width:100%') %>
+  <div>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @album.user.email.split('@')[0] %>
+  <%= @album.user.email.split('@')[0].capitalize %>
 </p>
 
 <%= link_to 'Edit', edit_album_path(@album) %> |

@@ -8,6 +8,6 @@ class PagesController < ApplicationController
   
   def home
     @user = current_user
-    redirect_to /albums/:id
+    redirect_to album_path(@user)
   end
 end

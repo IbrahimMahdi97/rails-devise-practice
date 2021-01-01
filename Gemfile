@@ -55,3 +55,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 gem 'devise-i18n'
+
+
+gem 'pry', '~> 0.13.1'
+
+gem 'world-flags', github: 'kristianmandrup/world-flags', branch: 'master'
+
+gem 'activestorage-database-service', github: 'TitovDigital/activestorage-database-service'

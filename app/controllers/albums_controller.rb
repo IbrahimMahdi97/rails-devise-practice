@@ -11,15 +11,25 @@ class AlbumsController < ApplicationController
   # GET /albums/1.json
   def show
     @album = Albums.find(params[:id])
+    
+    
   end
+
+  # def show_image
+  #   @album = Albums.find(params[:id])
+  #   send_data @album.image, :type => 'image/jpeg',:disposition => 'inline'
+  # end
+
 
   # GET /albums/new
   def new
     @album = Albums.new
+     
   end
 
   # GET /albums/1/edit
   def edit
+    @album = Albums.find(params[:id])
   end
 
   # POST /albums
@@ -41,8 +51,9 @@ class AlbumsController < ApplicationController
   # PATCH/PUT /albums/1
   # PATCH/PUT /albums/1.json
   def update
+    @album = Albums.find(params[:id]) 
     respond_to do |format|
-      if @album.update(album_params)
+      if @album.update!(album_params)
         format.html { redirect_to @album, notice: 'Albums was successfully updated.' }
         format.json { render :show, status: :ok, location: @album }
       else
@@ -55,9 +66,9 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.json
   def destroy
-    @album.destroy
+    @album.destroy(params[:id])
     respond_to do |format|
-      format.html { redirect_to albums_index_url, notice: 'Albums was successfully destroyed.' }
+      format.html { redirect_to albums_show_url, notice: 'Albums was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +81,6 @@ class AlbumsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def album_params
-      params.require(:album).permit(:title, :image)
+      params.require(:id).permit(:title, :image, :user_id, :id)
     end
 end
