@@ -10,8 +10,11 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.json
   def show
-    @album = Albums.find(params[:id])
-    
+    @album = Albums.find(params[:id]) 
+    binding.pry
+    # @album.image = Imaage.find(albums_id: @album.id)
+    @imaage = Imaage.where(albums_id: @album.id)
+    binding.pry
     
   end
 
@@ -24,34 +27,45 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   def new
     @album = Albums.new
-     
+    @album.user = current_user
+    
+    binding.pry
+    
+    # @imaage = Imaage.create!(albums_id: @album.id)
+    # @album.images.attach(params[:images])
   end
 
   # GET /albums/1/edit
   def edit
     @album = Albums.find(params[:id])
+    @imaage = Imaage.where(albums_id: @album.id)
   end
 
   # POST /albums
   # POST /albums.json
   def create
-    @album = Albums.new(album_params)
+    @album = Albums.create(album_params)
     @album.user = current_user
     respond_to do |format|
-      if @album.save
+      if @album.save!
+        # TODO : Refactor Cross Model
+        @imaage = Imaage.create!(albums_id: @album.id)
         format.html { redirect_to @album, notice: 'Albums was successfully created.' }
         format.json { render :show, status: :created, location: @album }
       else
         format.html { render :new }
         format.json { render json: @album.errors, status: :unprocessable_entity }
       end
+      
     end
+   
   end
 
   # PATCH/PUT /albums/1
   # PATCH/PUT /albums/1.json
   def update
-    @album = Albums.find(params[:id]) 
+    @album = Albums.find(params[:id])
+    
     respond_to do |format|
       if @album.update!(album_params)
         format.html { redirect_to @album, notice: 'Albums was successfully updated.' }
@@ -81,6 +95,6 @@ class AlbumsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def album_params
-      params.require(:id).permit(:title, :image, :user_id, :id)
+      params.require(:album).permit(:title, :user_id, :id, :imaages)
     end
 end

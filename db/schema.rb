@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_31_222545) do
+ActiveRecord::Schema.define(version: 2021_01_01_195740) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2020_12_31_222545) do
     t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
+  create_table "imaages", force: :cascade do |t|
+    t.integer "albums_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["albums_id"], name: "index_imaages_on_albums_id"
+  end
+
   create_table "models", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,4 +83,5 @@ ActiveRecord::Schema.define(version: 2020_12_31_222545) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "albums", "users"
+  add_foreign_key "imaages", "albums", column: "albums_id"
 end

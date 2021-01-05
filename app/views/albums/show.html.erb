@@ -2,10 +2,17 @@
   <strong>Title:</strong>
   <%= @album.title %> Album
 </p>
-
+<%# .variant %>
 <p>
   <div style='width: 500px; height:auto; margin:0 auto'>
-    <%= image_tag(@album.image, style:'width:100%') %>
+    <% @imaage.each do |image| %>
+      <%= image.id %>
+      <% if image.image.attached!%>
+        <%= image.image.image_url %>
+      <% end %>
+      <%# <%= image_tag(image.image, style:'width:100%') %> %>
+    <% end %>
+    <%# <%= image_tag(@album.imaages.variant, style:'width:100%') %> %>
   <div>
 </p>
 

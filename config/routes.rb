@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :albums
   post '/albums/new' => 'albums#create'
+  post '/albums/:id/edit' => 'albums#update'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

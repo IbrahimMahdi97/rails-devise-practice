@@ -1,0 +1,2 @@
+module ImaageHelper
+end
