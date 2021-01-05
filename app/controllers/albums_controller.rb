@@ -12,7 +12,6 @@ class AlbumsController < ApplicationController
   def show
     @album = Albums.find(params[:id]) 
     binding.pry
-    # @album.image = Imaage.find(albums_id: @album.id)
     @imaage = Imaage.where(albums_id: @album.id)
     binding.pry
     
@@ -48,6 +47,9 @@ class AlbumsController < ApplicationController
     @album.user = current_user
     respond_to do |format|
       if @album.save!
+        
+        binding.pry
+        
         # TODO : Refactor Cross Model
         @imaage = Imaage.create!(albums_id: @album.id)
         format.html { redirect_to @album, notice: 'Albums was successfully created.' }
@@ -95,6 +97,6 @@ class AlbumsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def album_params
-      params.require(:album).permit(:title, :user_id, :id, :imaages)
+      params.require(:album).permit(:title, :user_id, :id, :image, :imaages)
     end
 end
